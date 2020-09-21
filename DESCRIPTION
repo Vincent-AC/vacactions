@@ -1,5 +1,5 @@
 Package: vacactions
-Title: What the Package Does (One Line, Title Case)
+Title: My Pharmacometric Functions
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Vincent",
@@ -7,7 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "vincent@aracli.org",
            comment = c(ORCID = "0000-0002-1258-8054"))
-Description: What the package does (one paragraph).
+Description: Collection of functions that I develop for my work in Pharmacometrics
+  Useful for people who use R, NONMEM, PsN and pharmpy in their workflow.
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true
