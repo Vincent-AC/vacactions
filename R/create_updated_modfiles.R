@@ -39,7 +39,7 @@ create_updated_modfiles <-
         model$write(output_model_file, force = overwrite)
       }
 
-    purr::walk2(
+    purrr::walk2(
       input_model_files,
       output_model_files,
       update_single_modfile(overwrite = overwrite)
