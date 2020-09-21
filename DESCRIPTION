@@ -17,3 +17,5 @@ RoxygenNote: 7.1.1
 Imports: 
     reticulate,
     purrr
+URL: https://github.com/Vincent-AC/vacactions
+BugReports: https://github.com/Vincent-AC/vacactions/issues
