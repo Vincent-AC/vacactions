@@ -14,7 +14,7 @@
 #' to an already existing file, the existing file will be overwritten.
 #' Defaults to TRUE.
 #'
-#' @return
+#' @return New .mod files created
 #' @export
 #'
 #' @examples

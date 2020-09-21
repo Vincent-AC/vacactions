@@ -23,7 +23,7 @@ to an already existing file, the existing file will be overwritten.
 Defaults to TRUE.}
 }
 \value{
-
+New .mod files created
 }
 \description{
 The point of this function is to enable creation of multiple NONMEM model
