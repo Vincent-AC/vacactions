@@ -84,8 +84,8 @@ create_updated_modfiles <-
       input_model_files,
       output_model_files,
       update_single_modfile(
-        dir_input_files = dir_input_files,
-        dir_output_files = dir_output_files,
+        dir_input_file = dir_input_files,
+        dir_output_file = dir_output_files,
         overwrite = overwrite,
         update_psn_based_on = update_psn_based_on
       )
