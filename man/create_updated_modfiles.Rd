@@ -5,18 +5,26 @@
 \title{Create multiple NONMEM model files with updated initial estimates}
 \usage{
 create_updated_modfiles(
+  dir_input_files = "",
   input_model_files,
+  dir_output_files = "",
   output_model_files,
   overwrite = TRUE
 )
 }
 \arguments{
+\item{dir_input_files}{character. Contains path to directory containing the
+input model files. Defaults to "".}
+
 \item{input_model_files}{character vector of length 1 or n equal to the
-number of output files. Contains path(s) to model(s) to be copied with updated
+number of output files. Contains name(s) of model(s) to be copied with updated
 parameter initial estimates.}
 
-\item{output_model_files}{character vector of length n. Contains path(s) to
-new model files.}
+\item{dir_output_files}{character. Contains path to directory containing the
+output model files. Defaults to "".}
+
+\item{output_model_files}{character vector of length n. Contains name(s) of
+new model file(s).}
 
 \item{overwrite}{boolean of length 1. If TRUE and output_model_files refers
 to an already existing file, the existing file will be overwritten.
