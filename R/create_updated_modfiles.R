@@ -48,8 +48,7 @@ create_updated_modfiles <-
         model <-
           pharmpy$Model(base::paste0(dir_input_file, input_model_file))
 
-        if (file.exists(base::paste0(dir_input_file, gsub(".mod", ".ext", input_model_file))))
-        {
+        if (file.exists(base::paste0(dir_input_file, gsub(".mod", ".ext", input_model_file)))) {
           model$update_inits()
         }
 
@@ -58,23 +57,33 @@ create_updated_modfiles <-
         if (update_psn_based_on == TRUE)
         {
           input_run_n <-
-            base::gsub("[[:alpha:]]|[[:punct:]]", "", "run1.mod") %>% as.numeric()
+            base::gsub("[[:alpha:]]|[[:punct:]]", "", input_model_file) %>% as.numeric()
           output_model_lines <-
-            readLines(base::paste0(dir_output_file, output_model_file))
+            readLines(base::paste0(dir_output_file, output_model_file),
+                      warn = F)
 
-          if (base::length(base::grep("Based on:", "Based:")) == 0)
+          if (base::length(base::grep("Based on:", output_model_lines)) == 0) {
             #If there is no "Based on:" Create it as first line
-          {
-            base::append(output_lines,
-                         base::paste0(";; 1. Based on: ", input_run_n),
-                         after = 0)
-            base::writeLines(base::paste0(dir_output_file, output_model_file))
-          } else
+
+            output_model_lines_updated <- base::append(output_model_lines,
+                                                       base::paste0(";; 1. Based on: ", input_run_n),
+                                                       after = 0)
+            base::writeLines(
+              output_model_lines_updated,
+              base::paste0(dir_output_file, output_model_file)
+            )
+          } else {
             #If there is one or multiple "Based on:" modify them all
-          {
-            output_lines[base::grep("Based on:", output_lines)] <-
+
+            output_model_lines_updated <- output_model_lines
+
+            output_model_lines_updated[base::grep("Based on:", output_model_lines_updated)] <-
               base::paste0(";; 1. Based on: ", input_run_n)
-            base::writeLines(base::paste0(dir_output_file, output_model_file))
+
+            base::writeLines(
+              output_model_lines_updated,
+              base::paste0(dir_output_file, output_model_file)
+            )
           }
         }
 
@@ -83,9 +92,11 @@ create_updated_modfiles <-
     purrr::walk2(
       input_model_files,
       output_model_files,
-      update_single_modfile(
+      ~ update_single_modfile(
         dir_input_file = dir_input_files,
+        input_model_file = .x,
         dir_output_file = dir_output_files,
+        output_model_file = .y,
         overwrite = overwrite,
         update_psn_based_on = update_psn_based_on
       )
