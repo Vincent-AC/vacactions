@@ -17,6 +17,10 @@
 #' @param overwrite boolean of length 1. If TRUE and output_model_files refers
 #' to an already existing file, the existing file will be overwritten.
 #' Defaults to TRUE.
+#' @param update_psn_based_on boolean of length 1. If TRUE the PsN generated
+#' comment "Based on:" will be updated or created in the first line of the code
+#' if absent. Defaults to TRUE.
+#'
 #'
 #' @return New .mod files created
 #' @export
@@ -24,11 +28,12 @@
 #' @examples
 #' \dontrun{create_updated_modfiles("run1.mod",c("run2.mod","run3.mod"))}
 create_updated_modfiles <-
-  function(dir_input_files="",
+  function(dir_input_files = "",
            input_model_files,
-           dir_output_files="",
+           dir_output_files = "",
            output_model_files,
-           overwrite = TRUE)
+           overwrite = TRUE,
+           update_psn_based_on = TRUE)
   {
     pharmpy <- reticulate::import("pharmpy")
 
@@ -37,14 +42,42 @@ create_updated_modfiles <-
                input_model_file,
                dir_output_file,
                output_model_file,
-               overwrite)
+               overwrite,
+               update_psn_based_on)
       {
-        model <- pharmpy$Model(base::paste0(dir_input_file, input_model_file))
+        model <-
+          pharmpy$Model(base::paste0(dir_input_file, input_model_file))
 
         if (file.exists(base::paste0(dir_input_file, gsub(".mod", ".ext", input_model_file))))
+        {
           model$update_inits()
+        }
 
         model$write(base::paste0(dir_output_file, output_model_file), force = overwrite)
+
+        if (update_psn_based_on == TRUE)
+        {
+          input_run_n <-
+            base::gsub("[[:alpha:]]|[[:punct:]]", "", "run1.mod") %>% as.numeric()
+          output_model_lines <-
+            readLines(base::paste0(dir_output_file, output_model_file))
+
+          if (base::length(base::grep("Based on:", "Based:")) == 0)
+            #If there is no "Based on:" Create it as first line
+          {
+            base::append(output_lines,
+                         base::paste0(";; 1. Based on: ", input_run_n),
+                         after = 0)
+            base::writeLines(base::paste0(dir_output_file, output_model_file))
+          } else
+            #If there is one or multiple "Based on:" modify them all
+          {
+            output_lines[base::grep("Based on:", output_lines)] <-
+              base::paste0(";; 1. Based on: ", input_run_n)
+            base::writeLines(base::paste0(dir_output_file, output_model_file))
+          }
+        }
+
       }
 
     purrr::walk2(
@@ -53,7 +86,8 @@ create_updated_modfiles <-
       update_single_modfile(
         dir_input_files = dir_input_files,
         dir_output_files = dir_output_files,
-        overwrite = overwrite
+        overwrite = overwrite,
+        update_psn_based_on = update_psn_based_on
       )
     )
   }

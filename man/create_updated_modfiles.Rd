@@ -9,7 +9,8 @@ create_updated_modfiles(
   input_model_files,
   dir_output_files = "",
   output_model_files,
-  overwrite = TRUE
+  overwrite = TRUE,
+  update_psn_based_on = TRUE
 )
 }
 \arguments{
@@ -29,6 +30,10 @@ new model file(s).}
 \item{overwrite}{boolean of length 1. If TRUE and output_model_files refers
 to an already existing file, the existing file will be overwritten.
 Defaults to TRUE.}
+
+\item{update_psn_based_on}{boolean of length 1. If TRUE the PsN generated
+comment "Based on:" will be updated or created in the first line of the code
+if absent. Defaults to TRUE.}
 }
 \value{
 New .mod files created
