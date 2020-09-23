@@ -45,6 +45,8 @@ create_updated_modfiles <-
                overwrite,
                update_psn_based_on)
       {
+        usethis::ui_info(base::paste0("Creating ",output_model_file," from ",input_model_file))
+
         model <-
           pharmpy$Model(base::paste0(dir_input_file, input_model_file))
 
@@ -89,16 +91,18 @@ create_updated_modfiles <-
 
       }
 
+
     purrr::walk2(
       input_model_files,
       output_model_files,
-      ~ update_single_modfile(
+      purrr::possibly(~update_single_modfile(
         dir_input_file = dir_input_files,
         input_model_file = .x,
         dir_output_file = dir_output_files,
         output_model_file = .y,
         overwrite = overwrite,
         update_psn_based_on = update_psn_based_on
+      ), otherwise = NULL, quiet = F
       )
     )
   }
