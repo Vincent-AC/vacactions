@@ -21,6 +21,10 @@ You can install the development version from
 devtools::install_github("Vincent-AC/vacactions")
 ```
 
+Some functions of the package depend on the python package pharmpy.
+Please go [here](https://github.com/pharmpy/pharmpy) for installation
+instructions
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
