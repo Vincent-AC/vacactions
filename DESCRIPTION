@@ -18,7 +18,10 @@ Imports:
     reticulate,
     purrr,
     magrittr,
-    usethis
+    usethis,
+    readr,
+    dplyr,
+    tidyr
 URL: https://github.com/Vincent-AC/vacactions
 BugReports: https://github.com/Vincent-AC/vacactions/issues
 Suggests: 
