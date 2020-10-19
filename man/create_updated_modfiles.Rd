@@ -45,5 +45,8 @@ single model file multiple times or to create multiple output model files
 from multiple input model files.
 }
 \examples{
-\dontrun{create_updated_modfiles("run1.mod",c("run2.mod","run3.mod"))}
+\dontrun{create_updated_modfiles("../NONMEM/"
+                                 "run1.mod",
+                                 "../NONMEM",
+                               c("run2.mod","run3.mod"))}
 }

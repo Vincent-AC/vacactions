@@ -26,7 +26,10 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{create_updated_modfiles("run1.mod",c("run2.mod","run3.mod"))}
+#' \dontrun{create_updated_modfiles("../NONMEM/"
+#'                                  "run1.mod",
+#'                                  "../NONMEM",
+#'                                c("run2.mod","run3.mod"))}
 create_updated_modfiles <-
   function(dir_input_files = "",
            input_model_files,
