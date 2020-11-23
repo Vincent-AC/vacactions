@@ -11,8 +11,7 @@ unfix_parameters_and_replace_model(
 )
 }
 \arguments{
-\item{dir_input_files}{character of length 1 or n equal to the
-number of input files. Contains path to directory containing the
+\item{dir_input_files}{character of length 1. Contains path to directory containing the
 input model files. Defaults to "".}
 
 \item{input_model_files}{character vector of length 1 or n equal to the
