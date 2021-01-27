@@ -7,7 +7,8 @@
 fix_parameters_and_replace_model(
   dir_input_files,
   input_model_files,
-  parameters_to_fix
+  parameters_to_fix,
+  init_values_to_fix
 )
 }
 \arguments{
@@ -20,6 +21,10 @@ fixed parameters}
 
 \item{parameters_to_fix}{character of length 1 or p equal to the number of
 parameters to be fixed. Contains the names of the parameters to be fixed.}
+
+\item{init_values_to_fix}{character of length 1 or p equal to the number of
+parameters to be fixed. Contains the initial values of the parameters to be
+fixed.}
 }
 \value{
 New .mod files created

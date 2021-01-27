@@ -18,9 +18,9 @@ $ERROR
       IRES=DV-IPRED   ;  individual-specific residual
       IWRES=IRES/W    ;  individual-specific weighted residual
 
-$THETA  (0,0.0105)    ; CL 
+$THETA  (0,0.1)    ; T_CL 
 
-$THETA  (0,1.0500)    ; V
+$THETA  (0,1.0500)    ; T_V
 
 $OMEGA            .4  ; IVCL
                   .25 ; IVV
