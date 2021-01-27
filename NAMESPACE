@@ -3,5 +3,6 @@
 export("%>%")
 export(create_parameter_table_SIR)
 export(create_updated_modfiles)
+export(fix_parameters_and_replace_model)
 export(unfix_parameters_and_replace_model)
 importFrom(magrittr,"%>%")
