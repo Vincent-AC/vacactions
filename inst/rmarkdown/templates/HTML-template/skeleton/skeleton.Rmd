@@ -1,0 +1,22 @@
+---
+title: "Template Title"
+author: "Your Name"
+date: '`r format(Sys.Date())`'
+output:
+  html_document: 
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+# Material and Methods
+
+# Results
+
+# Conclusion
