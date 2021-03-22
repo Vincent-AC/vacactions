@@ -20,3 +20,12 @@ knitr::opts_chunk$set(echo = TRUE)
 # Results
 
 # Conclusion
+
+# sessionInfo
+
+<details>
+  <summary>Click to expand!</summary>
+```{r sessionInfo}
+sessionInfo()
+```
+</details>
