@@ -10,7 +10,7 @@ output:
 ---
 
 ```{r packages and setup, include=FALSE}
-knitr::opts_chunk$set(echo = F, warning = F, message = F, results = "hide")
+knitr::opts_chunk$set(echo = F, warning = F, message = F)
 ```
 
 <!-- the next two chunks enable zooming on images but make the rstudio browser unusable -->
