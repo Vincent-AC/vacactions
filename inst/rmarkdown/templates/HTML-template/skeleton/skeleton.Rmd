@@ -10,7 +10,7 @@ output:
 ---
 
 ```{r packages and setup, include=FALSE}
-knitr::opts_chunk$set(echo = F, warning = F, message = F)
+knitr::opts_chunk$set(warning = F, message = F)
 options(digits = 2)
 ```
 
