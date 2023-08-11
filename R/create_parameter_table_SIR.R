@@ -23,7 +23,7 @@ create_parameter_table_SIR <- function(sir_results_path,
   library(readr)
   sir_results <- readr::read_csv(sir_results_path,
                           skip = 4) %>%
-    dplyr::filter(`...1` %in% c("center_estimate",
+    dplyr::filter(`...1` %in% c("center_estimate","rse",
                      base::paste0(interval_bounds * 100, "%"))) %>%
     tidyr::pivot_longer(-`...1`) %>%
     tidyr::pivot_wider(name,
@@ -41,47 +41,52 @@ create_parameter_table_SIR <- function(sir_results_path,
     dplyr::rename(Parameter = name)
 
   report_table <- sir_results %>%
-    dplyr::mutate(
-      !!base::paste0(
-        "Parameter [",
-        (interval_bounds[2] - interval_bounds[1]) * 100,
-        "%CI]"
-      ) :=
-        base::paste0(
-          base::signif(center_estimate, sig_dig),
-          " [",
-          base::signif(lower_bound, sig_dig),
-          " - ",
-          base::signif(upper_bound, sig_dig),
-          "]"
-        ),
-      !!base::paste0(
-        "Parameter [",
-        (interval_bounds[2] - interval_bounds[1]) * 100,
-        "%CI-Relative Values]"
-      ) :=
-        base::paste0(
-          base::signif(center_estimate, sig_dig),
-          " [",
-          base::signif(relative_lower_bound, sig_dig) * 100,
-          "% - ",
-          base::signif(relative_upper_bound, sig_dig) * 100,
-          "%]"
-        )
-    ) %>%
-    dplyr::select(
-      Parameter,
-      base::paste0(
-        "Parameter [",
-        (interval_bounds[2] - interval_bounds[1]) * 100,
-        "%CI]"
-      ),
-      base::paste0(
-        "Parameter [",
-        (interval_bounds[2] - interval_bounds[1]) * 100,
-        "%CI-Relative Values]"
-      )
-    )
+          dplyr::mutate(
+            !!base::paste0(
+              "Parameter [",
+              (interval_bounds[2] - interval_bounds[1]) * 100,
+              "%CI] (RSE%)"
+            ) :=
+              base::paste0(
+                base::signif(center_estimate, sig_dig),
+                " [",
+                base::signif(lower_bound, sig_dig),
+                " - ",
+                base::signif(upper_bound, sig_dig),
+                "]",
+                " (",
+                base::signif(rse,sig_dig) * 100,
+                "%)"
+              ),!!base::paste0(
+                "Parameter [",
+                (interval_bounds[2] - interval_bounds[1]) * 100,
+                "%CI-Relative Values] (RSE%)"
+              ) :=
+              base::paste0(
+                base::signif(center_estimate, sig_dig),
+                " [",
+                base::signif(relative_lower_bound, sig_dig) * 100,
+                "% - ",
+                base::signif(relative_upper_bound, sig_dig) * 100,
+                "%]",
+                " (",
+                base::signif(rse,sig_dig) * 100,
+                "%)"
+              )
+          ) %>%
+          dplyr::select(
+            Parameter,
+            base::paste0(
+              "Parameter [",
+              (interval_bounds[2] - interval_bounds[1]) * 100,
+              "%CI] (RSE%)"
+            ),
+            base::paste0(
+              "Parameter [",
+              (interval_bounds[2] - interval_bounds[1]) * 100,
+              "%CI-Relative Values] (RSE%)"
+            )
+          )
 
   base::list(sir_results, report_table)
 }
