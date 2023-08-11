@@ -23,11 +23,11 @@ create_parameter_table_SIR <- function(sir_results_path,
   library(readr)
   sir_results <- readr::read_csv(sir_results_path,
                           skip = 4) %>%
-    dplyr::filter(X1 %in% c("center_estimate",
+    dplyr::filter(`...1` %in% c("center_estimate",
                      base::paste0(interval_bounds * 100, "%"))) %>%
-    tidyr::pivot_longer(-X1) %>%
+    tidyr::pivot_longer(-`...1`) %>%
     tidyr::pivot_wider(name,
-                names_from = X1) %>%
+                names_from = `...1`) %>%
     dplyr::rename(
       lower_bound = base::paste0(interval_bounds[1] * 100, "%"),
       upper_bound = base::paste0(interval_bounds[2] * 100, "%")
